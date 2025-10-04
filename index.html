@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Falling Dog Clicker Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>🐶 Falling Dog Clicker 🐾</h1>
+  <p>Click the falling dogs to earn points!</p>
+  <div id="score">Score: 0</div>
+  <div id="game-container"></div>
+
+  <script>
+    const gameContainer = document.getElementById("game-container");
+    const scoreDisplay = document.getElementById("score");
+    let score = 0;
+
+    function createDog() {
+      const dog = document.createElement("img");
+      dog.src = "dog.jpg";
+      dog.classList.add("dog");
+
+      // Random horizontal start position
+      dog.style.left = Math.random() * 90 + "%";
+
+      // Click = +1 point
+      dog.addEventListener("click", () => {
+        score++;
+        scoreDisplay.textContent = "Score: " + score;
+        dog.remove(); // Remove when clicked
+      });
+
+      gameContainer.appendChild(dog);
+
+      // Remove dog after 5 seconds if not clicked
+      setTimeout(() => {
+        dog.remove();
+      }, 5000);
+    }
+
+    // Create a new dog every 1 second
+    setInterval(createDog, 1000);
+  </script>
+</body>
+</html>
